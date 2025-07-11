@@ -1,3 +1,153 @@
+# Healthcare Management System
+
+A full-stack web application for managing patient records and medical visits, built with modern web technologies.
+
+## Features
+
+### Patient Management
+- Create, view, update, and delete patient records
+- Store comprehensive patient information including:
+  - Personal details (name, email, phone)
+  - Demographic information (date of birth, gender, address)
+  - Visit history
+
+### Visit Management
+- Schedule and track patient visits
+- Record visit details including:
+  - Visit date and time
+  - Type of visit (e.g., Checkup, Follow-up)
+  - Clinical notes and observations
+- View visit history per patient
+
+### User Interface
+- Modern, responsive design
+- Intuitive forms for data entry
+- Search and filter functionality
+- Clean, organized display of patient and visit information
+
+## Technology Stack
+
+### Frontend
+- **Framework**: Angular 15+
+- **UI Components**: Angular Material
+- **State Management**: RxJS
+- **Build Tool**: Angular CLI
+
+### Backend
+- **Runtime**: Node.js
+- **Framework**: NestJS
+- **Database**: MongoDB with Mongoose ODM
+- **API**: RESTful architecture
+
+## Prerequisites
+
+- Node.js (v16 or higher)
+- npm (comes with Node.js)
+- MongoDB (v5.0 or higher)
+- Angular CLI (for frontend development)
+
+## Getting Started
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+   ```bash
+   cd Backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the Backend directory with the following content:
+   ```
+   MONGODB_URI=mongodb://localhost:27017/healthcare_db
+   PORT=3000
+   ```
+
+4. Start the backend server:
+   ```bash
+   npm run start:dev
+   ```
+   The API will be available at `http://localhost:3000`
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd Frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   ng serve
+   ```
+   The application will be available at `http://localhost:4200`
+
+## Project Structure
+
+```
+Final_v2/
+├── Backend/               # Backend server code
+│   ├── src/
+│   │   ├── patients/     # Patient-related functionality
+│   │   ├── visits/       # Visit-related functionality
+│   │   ├── app.module.ts # Main application module
+│   │   └── main.ts       # Application entry point
+│   └── ...
+│
+└── Frontend/             # Frontend Angular application
+    ├── src/
+    │   ├── app/
+    │   │   ├── features/
+    │   │   │   ├── patients/  # Patient management
+    │   │   │   └── visits/    # Visit management
+    │   │   ├── shared/        # Shared components and services
+    │   │   └── ...
+    │   └── ...
+    └── ...
+```
+
+## Development
+
+### Running Tests
+
+Backend tests:
+```bash
+cd Backend
+npm test
+```
+
+Frontend tests:
+```bash
+cd Frontend
+ng test
+```
+
+### Building for Production
+
+Backend production build:
+```bash
+cd Backend
+npm run build
+npm run start:prod
+```
+
+Frontend production build:
+```bash
+cd Frontend
+ng build --configuration production
+```
+
+
+
+
 # Healthcare Management System API
 
 This is the backend API for the Healthcare Management System, built with NestJS and MongoDB. It provides endpoints for managing patients and their medical visits.
@@ -233,9 +383,6 @@ Run the test suite:
 npm test
 ```
 
-## API Documentation
-
-For detailed API documentation, please refer to [API_DOCS.md](./API_DOCS.md)
 
 ## Contributing
 
@@ -245,155 +392,7 @@ For detailed API documentation, please refer to [API_DOCS.md](./API_DOCS.md)
 4. Push to the branch
 5. Open a pull request
 
-## License
 
-This project is licensed under the MIT License.
 
-# Healthcare Management System
-
-A full-stack web application for managing patient records and medical visits, built with modern web technologies.
-
-## Features
-
-### Patient Management
-- Create, view, update, and delete patient records
-- Store comprehensive patient information including:
-  - Personal details (name, email, phone)
-  - Demographic information (date of birth, gender, address)
-  - Visit history
-
-### Visit Management
-- Schedule and track patient visits
-- Record visit details including:
-  - Visit date and time
-  - Type of visit (e.g., Checkup, Follow-up)
-  - Clinical notes and observations
-- View visit history per patient
-
-### User Interface
-- Modern, responsive design
-- Intuitive forms for data entry
-- Search and filter functionality
-- Clean, organized display of patient and visit information
-
-## Technology Stack
-
-### Frontend
-- **Framework**: Angular 15+
-- **UI Components**: Angular Material
-- **State Management**: RxJS
-- **Build Tool**: Angular CLI
-
-### Backend
-- **Runtime**: Node.js
-- **Framework**: NestJS
-- **Database**: MongoDB with Mongoose ODM
-- **API**: RESTful architecture
-
-## Prerequisites
-
-- Node.js (v16 or higher)
-- npm (comes with Node.js)
-- MongoDB (v5.0 or higher)
-- Angular CLI (for frontend development)
-
-## Getting Started
-
-### Backend Setup
-
-1. Navigate to the backend directory:
-   ```bash
-   cd Backend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file in the Backend directory with the following content:
-   ```
-   MONGODB_URI=mongodb://localhost:27017/healthcare_db
-   PORT=3000
-   ```
-
-4. Start the backend server:
-   ```bash
-   npm run start:dev
-   ```
-   The API will be available at `http://localhost:3000`
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-   ```bash
-   cd Frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   ng serve
-   ```
-   The application will be available at `http://localhost:4200`
-
-## Project Structure
-
-```
-Final_v2/
-├── Backend/               # Backend server code
-│   ├── src/
-│   │   ├── patients/     # Patient-related functionality
-│   │   ├── visits/       # Visit-related functionality
-│   │   ├── app.module.ts # Main application module
-│   │   └── main.ts       # Application entry point
-│   └── ...
-│
-└── Frontend/             # Frontend Angular application
-    ├── src/
-    │   ├── app/
-    │   │   ├── features/
-    │   │   │   ├── patients/  # Patient management
-    │   │   │   └── visits/    # Visit management
-    │   │   ├── shared/        # Shared components and services
-    │   │   └── ...
-    │   └── ...
-    └── ...
-```
-
-## Development
-
-### Running Tests
-
-Backend tests:
-```bash
-cd Backend
-npm test
-```
-
-Frontend tests:
-```bash
-cd Frontend
-ng test
-```
-
-### Building for Production
-
-Backend production build:
-```bash
-cd Backend
-npm run build
-npm run start:prod
-```
-
-Frontend production build:
-```bash
-cd Frontend
-ng build --configuration production
-```
 
 
