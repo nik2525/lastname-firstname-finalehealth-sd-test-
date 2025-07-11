@@ -1,4 +1,4 @@
-# Healthcare Management System
+# Patient & Visit Management System
 
 A full-stack web application for managing patient records and medical visits, built with modern web technologies.
 
