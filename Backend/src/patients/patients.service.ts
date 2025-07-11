@@ -2,7 +2,9 @@ import { Injectable, NotFoundException, ConflictException } from "@nestjs/common
 import { InjectModel } from "@nestjs/mongoose"
 import { Model } from "mongoose"
 import { Patient } from "./schemas/patient.schema"
+import { Visit } from "../visits/schemas/visit.schema"
 import type { PatientDocument } from "./schemas/patient.schema"
+import type { VisitDocument } from "../visits/schemas/visit.schema"
 import type { CreatePatientDto } from "./dto/create-patient.dto"
 import type { UpdatePatientDto } from "./dto/update-patient.dto"
 import type { PatientQueryDto } from "./dto/patient-query.dto"
@@ -10,7 +12,8 @@ import type { PatientQueryDto } from "./dto/patient-query.dto"
 @Injectable()
 export class PatientsService {
   constructor(
-    @InjectModel(Patient.name) private patientModel: Model<PatientDocument>
+    @InjectModel(Patient.name) private patientModel: Model<PatientDocument>,
+    @InjectModel(Visit.name) private visitModel: Model<VisitDocument>
   ) {}
 
   async create(createPatientDto: CreatePatientDto): Promise<Patient> {
@@ -79,9 +82,32 @@ export class PatientsService {
   }
 
   async remove(id: string): Promise<void> {
-    const result = await this.patientModel.findByIdAndDelete(id).exec()
-    if (!result) {
-      throw new NotFoundException(`Patient with ID ${id} not found`)
+    // First, verify the patient exists
+    const patient = await this.patientModel.findById(id).exec();
+    if (!patient) {
+      throw new NotFoundException(`Patient with ID ${id} not found`);
+    }
+
+    // Use a transaction to ensure data consistency
+    const session = await this.patientModel.db.startSession();
+    session.startTransaction();
+
+    try {
+      // Delete all visits associated with this patient
+      await this.visitModel.deleteMany({ patientId: id }).session(session);
+      
+      // Delete the patient
+      await this.patientModel.findByIdAndDelete(id).session(session);
+      
+      // Commit the transaction
+      await session.commitTransaction();
+    } catch (error) {
+      // If anything goes wrong, abort the transaction
+      await session.abortTransaction();
+      throw error;
+    } finally {
+      // End the session
+      session.endSession();
     }
   }
 
